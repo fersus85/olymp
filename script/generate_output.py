@@ -1,4 +1,5 @@
 import logging
+from typing import Union
 from datetime import timedelta, datetime
 
 
@@ -29,7 +30,7 @@ def calculate_durations(
 
 def generate_output(
     competitors: dict[str, dict[str, str]], durations: dict[int, timedelta]
-) -> list[dict[str, str]]:
+) -> list[dict[str, Union[str, timedelta]]]:
     """
     Функция для генерации выходных данных.
     :param competitors: dict словарь с номером и фио спортсмена
@@ -37,7 +38,7 @@ def generate_output(
     :return: отсортированный список словарей с финальными данными
     """
     logger.info("Generate output")
-    output = []
+    output: list[dict[str, Union[str, timedelta]]] = []
     for number, fio in competitors.items():
         try:
             number = number.strip("\ufeff")
@@ -46,7 +47,7 @@ def generate_output(
             continue
 
         try:
-            result_time = str(durations[int(number)])
+            result_time = durations[int(number)]
         except KeyError as ex:
             logger.warning(f"Result time not found for competitor: {ex}")
             continue

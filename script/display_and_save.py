@@ -1,6 +1,8 @@
 import json
 import logging
 
+from utils.utils import format_timedelta
+
 
 logger = logging.getLogger(__name__)
 
@@ -13,16 +15,15 @@ def display_output(data: list[dict[str, str]]) -> None:
         f"| {'Занятое место':^15} | {'Нагрудный номер':^15} | "
         f"{'Имя':^15} | {'Фамилия':^15} | {'Результат':^15} |"
     )
-    print(
-        "| --------------- | --------------- | --------------- | "
-        " -------------- | --------------- |"
-    )
+    print("-" * 91)
     for i, result in enumerate(data, start=1):
         try:
+            result_time = result['result']
+            formatted_time = format_timedelta(result_time)
             result_str = (
                 f"| {i:^15} | {result['number']:^15} | {result['name']:^15} | "
                 f"{result['surname']:^15} | "
-                f"{result['result'][2:-4].replace('.', ','):^15} |"
+                f"{formatted_time:^15} |"
             )
             print(result_str)
         except KeyError as ex:
@@ -40,11 +41,12 @@ def save_results_in_json(results: list[dict[str, str]], path: str) -> None:
     save_dict = {}
     for i, result in enumerate(results, start=1):
         try:
+            formatted_time = format_timedelta(result["result"])
             save_dict[str(i)] = {
                 "Нагрудный номер": str(result["number"]),
                 "Имя": result["surname"],
                 "Фамилия": result["name"],
-                "Результат": result["result"],
+                "Результат": formatted_time,
             }
         except KeyError as ex:
             logger.warning(f"Key does not exist {ex}")
