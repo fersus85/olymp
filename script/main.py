@@ -1,8 +1,8 @@
 import logging
 
-from read_input import load_competitors_from_json, load_results_from_txt
-from generate_output import calculate_durations, generate_output
-from display_and_save import display_output, save_results_in_json
+from modules import load_competitors_from_json, load_results_from_txt
+from modules import calculate_durations, generate_output
+from modules import display_output, save_results_in_json
 
 from logging_config import setup_logging
 

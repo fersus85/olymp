@@ -1,7 +1,7 @@
 import logging
-from typing import Union
 from datetime import timedelta, datetime
 
+from .models import ResultDict
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def calculate_durations(
 
 def generate_output(
     competitors: dict[str, dict[str, str]], durations: dict[int, timedelta]
-) -> list[dict[str, Union[str, timedelta]]]:
+) -> list[ResultDict]:
     """
     Функция для генерации выходных данных.
     :param competitors: dict словарь с номером и фио спортсмена
@@ -38,7 +38,7 @@ def generate_output(
     :return: отсортированный список словарей с финальными данными
     """
     logger.info("Generate output")
-    output: list[dict[str, Union[str, timedelta]]] = []
+    output: list[ResultDict] = []
     for number, fio in competitors.items():
         try:
             number = number.strip("\ufeff")
