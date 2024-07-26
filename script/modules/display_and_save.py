@@ -1,7 +1,7 @@
 import json
 import logging
 
-from utils.utils import format_timedelta
+from .utils import format_timedelta
 from .models import ResultDict
 from datetime import timedelta
 

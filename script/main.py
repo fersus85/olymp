@@ -1,10 +1,10 @@
 import logging
 
-from modules import load_competitors_from_json, load_results_from_txt
-from modules import calculate_durations, generate_output
-from modules import display_output, save_results_in_json
+from script.modules import load_competitors_from_json, load_results_from_txt
+from script.modules import calculate_durations, generate_output
+from script.modules import display_output, save_results_in_json
 
-from logging_config import setup_logging
+from script.logging_config import setup_logging
 
 
 def main():
