@@ -3,8 +3,8 @@
   "disable_existing_loggers": false,
   "formatters": {
     "simple": {
-      "format": "%(asctime)s %(levelname)s %(message)s %(module)s",
-      "datefmt": "%Y-%m-%dT%H:%M:%S%z"
+      "format": "%(asctime)s %(module)-16s:%(lineno)s %(levelname)-10s %(message)s",
+      "datefmt": "[%Y-%m-%d %H:%M:%S%z]"
     }
   },
 "handlers": {

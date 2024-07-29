@@ -19,12 +19,12 @@ def calculate_durations(
     try:
         for number, times in results.items():
             if "start" not in times or "finish" not in times:
-                logger.warning(f"Missing start or finish time{number}")
+                logger.warning("Missing start or finish time: %s", number)
                 continue
             duration = times["finish"] - times["start"]
             durations[number] = duration
     except KeyError as ex:
-        logger.error(f"Error {ex}")
+        logger.exception("KeyError while calculate duration: %s", ex)
     return durations
 
 
@@ -43,13 +43,13 @@ def generate_output(
         try:
             number = number.strip("\ufeff")
         except ValueError as ex:
-            logger.warning(f"Error converting number {number} to int: {ex}")
+            logger.warning("Error converting number %s to int: %s", number, ex)
             continue
 
         try:
             result_time = durations[int(number)]
         except KeyError as ex:
-            logger.warning(f"Result time not found for competitor: {ex}")
+            logger.warning("Result time not found for competitor: %s", ex)
             continue
 
         try:
@@ -62,6 +62,6 @@ def generate_output(
                 }
             )
         except KeyError as ex:
-            logger.warning(f"Key missing in competitor data for number {ex}")
+            logger.warning("Key missing in competitor data for number: %s", ex)
     output.sort(key=lambda x: x["result"])
     return output

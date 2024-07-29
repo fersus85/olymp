@@ -18,11 +18,11 @@ def load_competitors_from_json(path: str) -> dict[str, dict[str, str]]:
             competitors = json.load(file)
         return competitors
     except FileNotFoundError as ex:
-        logger.error(f"Error {ex}")
+        logger.error("File not found: %s", ex)
     except json.JSONDecodeError as ex:
-        logger.error(f"Error decoding JSON from file: {path} - {ex}")
+        logger.error("Error decoding JSON from file: %s, %s", path, ex)
     except IOError as ex:
-        logger.error(f"Error i/a {ex}")
+        logger.exception("Error i/a: %s", ex)
     return {}
 
 
@@ -46,9 +46,9 @@ def load_results_from_txt(path: str) -> dict[int, dict[str, datetime]]:
                     results.setdefault(int(number), {}).update(finish=fin_time)
         return results
     except FileNotFoundError as ex:
-        logger.error(f"Error {ex}")
+        logger.error("File not found %s", ex)
     except ValueError as ex:
-        logger.error(f"Error parsing line in file: {path} - {ex}")
+        logger.error("Error parsing line in file: %s, %s", path, ex)
     except IOError as ex:
-        logger.error(f"Error i/a {ex}")
+        logger.exception("Error i/a: %s", ex)
     return {}

@@ -30,7 +30,8 @@ def display_output(data: list[ResultDict]) -> None:
                 )
                 print(result_str)
         except KeyError as ex:
-            logger.error(f"Key missing trying parse data for displaying: {ex}")
+            logger.exception(
+                "Key missing trying parse data for displaying: %s", ex)
             continue
 
 
@@ -53,11 +54,11 @@ def save_results_in_json(results: list[ResultDict], path: str) -> None:
                     "Результат": formatted_time,
                 }
         except KeyError as ex:
-            logger.warning(f"Key does not exist {ex}")
+            logger.warning("Key does not exist: %s", ex)
     try:
         with open(path, "w", encoding="utf-8") as file:
             json.dump(save_dict, file, ensure_ascii=False, indent=4)
     except FileExistsError as ex:
-        logger.error(f"Error {ex}")
+        logger.exception("File already exist: %s", ex)
     except IOError as ex:
-        logger.error(f"Error i/a {ex}")
+        logger.exception("Error i/a: %s", ex)
