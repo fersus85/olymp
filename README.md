@@ -9,11 +9,11 @@ python = "3.9"
 
 1. Клонируйте репозиторий:
     ```bash
-    git clone https://github.com/fora-hr/23-07-2024-fersus85.git
+    git clone https://github.com/fersus85/olymp.git
     ```
 2. Перейдите в директорию проекта:
     ```bash
-    cd 23-07-2024-fersus85
+    cd olymp
     ```
 3. Создайте виртуальное и активируйте окружение:
   ```bash
